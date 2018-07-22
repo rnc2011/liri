@@ -4,7 +4,6 @@ var fs = require("fs");
 var request = require("request");
 var Spotify = require("node-spotify-api");
 var Twitter = require("twitter");
-val2 = ""
 
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
@@ -51,14 +50,14 @@ function grabTweets() {
 
 function grabSpotify() {
     //spotify.getArtist
-     if(input === undefined){
-         input = "The Sign"
-     }
+    if (input === undefined) {
+        input = "The Sign"
+    }
 
-    spotify.search({ type: 'track', query: input }, function(err, data) {
+    spotify.search({ type: 'track', query: input }, function (err, data) {
         if (err) {
             console.log('ERROR: ' + err);
-            return; 
+            return;
         } else {
             var songInfo = data.tracks.items[0];
             console.log(" " + " " + "SPOTIFY RESULTS: " + " " + " ")
@@ -66,12 +65,17 @@ function grabSpotify() {
             console.log("SONG:", songInfo.name);
             console.log("ALBUM:", songInfo.album.name);
             console.log("PREVIEW:", songInfo.preview_url);
+            fs.appendFile("log.txt", songInfo.artists[0].name + songInfo.name + songInfo.album.name + songInfo.preview_url, function (err) {
+                if (err) {
+                    console.log("ERROR")
+                }
+            });
         };
     });
 }
 
 function grabMovie() {
-    if(input === undefined){
+    if (input === undefined) {
         input = "Mr. Nobody"
     }
     request("http://www.omdbapi.com/?apikey=trilogy&t=" + input, function (error, response, body) {
