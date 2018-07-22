@@ -65,7 +65,7 @@ function grabSpotify() {
             console.log("SONG:", songInfo.name);
             console.log("ALBUM:", songInfo.album.name);
             console.log("PREVIEW:", songInfo.preview_url);
-            fs.appendFile("log.txt", songInfo.artists[0].name + songInfo.name + songInfo.album.name + songInfo.preview_url, function (err) {
+            fs.appendFile("log.txt", "--------------" + "\n" + songInfo.artists[0].name + "\n" + songInfo.name + "\n"+ songInfo.album.name + "\n"+ songInfo.preview_url+ "\n"+ "--------------" + "\n" + "\n", function (err) {
                 if (err) {
                     console.log("ERROR")
                 }
@@ -94,6 +94,12 @@ function grabMovie() {
             console.log(data.Language)
             console.log(data.Plot)
             console.log(data.Actors)
+            fs.appendFile("log.txt", "--------------" + "\n" + data.Title + "\n" + data.Year + "\n"+ data.imdbRating + "\n"+ data.Ratings[1].Value + "\n"+ data.Country + "\n"+ data.Language + "\n"+ data.Plot + "\n"+ data.Actors+ "\n" + "--------------" + "\n" + "\n", function (err) {
+                if (err) {
+                    console.log("ERROR")
+                }
+            });
+            
         }
     });
 
